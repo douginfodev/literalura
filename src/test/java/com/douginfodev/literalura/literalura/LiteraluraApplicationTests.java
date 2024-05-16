@@ -1,4 +1,4 @@
-package com.douginfodev.literalura;
+package com.douginfodev.literalura.literalura;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
