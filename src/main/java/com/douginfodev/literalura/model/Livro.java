@@ -1,16 +1,35 @@
 package com.douginfodev.literalura.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "livros")
 public class Livro {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String titulo;
     private String autor;
     private String idioma;
+
+    @Column(unique = true)
+    private Integer isbn;
+
     private String anoLancamento;
 
-    public Livro(String Titulo, String Autor, String Idioma, String AnoLancamento) {
+    public Livro(){}
+
+    public Livro(String Titulo, String Autor, String Idioma,Integer Isbn, String AnoLancamento) {
         this.titulo = Titulo;
         this.autor = Autor;
         this.idioma = Idioma;
+        this.isbn = Isbn;
         this.anoLancamento = AnoLancamento;
     }
 
@@ -55,4 +74,22 @@ public class Livro {
         this.anoLancamento = anoLancamento;
     }
 
+
+    public Integer getIsbn() {
+        return isbn;
+    }
+
+
+    public void setIsbn(Integer isbn) {
+        this.isbn = isbn;
+    }
+
+    @Override
+    public String toString() {
+        return "titulo=" + titulo +
+                ", autor='" + autor + '\'' +
+                ", idioma=" + idioma +
+                ", isbn=" + isbn +
+                ", Ano Lancamento=" + anoLancamento;
+    }
 }
