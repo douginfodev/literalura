@@ -15,7 +15,9 @@ public class Livro {
     private Integer id;
 
     private String titulo;
-    private String autor;
+    
+    private Integer autor_id;
+
     private String idioma;
 
     @Column(unique = true)
@@ -23,11 +25,17 @@ public class Livro {
 
     private String anoLancamento;
 
+   // @OneToMany(mappedBy = "livro")
+   // private List<Autor> autores = new ArrayList<>();
+
+
+    //private List<Autor> autor = new ArrayList<>();
+
     public Livro(){}
 
-    public Livro(String Titulo, String Autor, String Idioma,Integer Isbn, String AnoLancamento) {
+    public Livro(String Titulo, Integer Autor, String Idioma,Integer Isbn, String AnoLancamento) {
         this.titulo = Titulo;
-        this.autor = Autor;
+        this.autor_id = Autor;
         this.idioma = Idioma;
         this.isbn = Isbn;
         this.anoLancamento = AnoLancamento;
@@ -50,12 +58,12 @@ public class Livro {
         this.titulo = titulo;
     }
 
-    public String getAutor() {
-        return autor;
+    public Integer getAutor() {
+        return autor_id;
     }
 
-    public void setAutor(String autor) {
-        this.autor = autor;
+    public void setAutor(Integer autor) {
+        this.autor_id = autor;
     }
 
     public String getIdioma() {
@@ -86,10 +94,13 @@ public class Livro {
 
     @Override
     public String toString() {
-        return "titulo=" + titulo +
-                ", autor='" + autor + '\'' +
-                ", idioma=" + idioma +
-                ", isbn=" + isbn +
-                ", Ano Lancamento=" + anoLancamento;
+        String aux_autorid = Integer.toString(autor_id);
+        return  "ID: "+ id + "\n"+
+                "TITULO: " + titulo + "\n"+
+                "AUTOR_ID: " + aux_autorid  + '\'' + "\n"+
+                "IDIOMA: " + idioma + "\n" +
+                "ISBN: " + isbn + "\n" +
+                "LANCAMENTO: " + anoLancamento+"\n"+
+                "----------------------------------"+"\n";
     }
 }

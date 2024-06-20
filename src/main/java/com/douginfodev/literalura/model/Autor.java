@@ -15,6 +15,10 @@ public class Autor {
 
     private String nome;
 
+   // @ManyToOne
+   // private Livro livro;
+
+
     public Integer getId() {
         return id;
     }
@@ -37,5 +41,10 @@ public class Autor {
         this.nome = nome;
     }
 
-    
+    @Override
+    public String toString() {
+        return  "ID: " + this.id + "\n"+
+                "NOME: " + this.nome + "\n"+
+                "----------------------------------"+"\n";
+    }
 }
