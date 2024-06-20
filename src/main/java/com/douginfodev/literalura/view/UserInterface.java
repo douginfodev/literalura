@@ -3,7 +3,9 @@ package com.douginfodev.literalura.view;
 import java.util.List;
 import java.util.Scanner;
 
+import com.douginfodev.literalura.model.Autor;
 import com.douginfodev.literalura.model.Livro;
+import com.douginfodev.literalura.repository.AutorRepository;
 import com.douginfodev.literalura.repository.LivroRepository;
 
 public class UserInterface {
@@ -11,9 +13,11 @@ public class UserInterface {
     int menuNumber = 0;
  
     private LivroRepository repository;
+    private AutorRepository repositoryautor;
 
-    public UserInterface(LivroRepository repository) {
+    public UserInterface(LivroRepository repository, AutorRepository repositoryautor) {
         this.repository = repository;
+        this.repositoryautor = repositoryautor;
     }
 
     public void printMenu() {
@@ -38,14 +42,19 @@ public class UserInterface {
             }
 
             if (menuNumber == 2){
-                SelectLivro();
+                SelectAllLivro();
                 System.out.println("ENTREI NO SELECT :" + menuNumber);
-              }
+            }
+
+            if (menuNumber == 3){
+                SelectAllAutor();
+                System.out.println("ENTREI NO SELECT :" + menuNumber);
+            }
         }
     }
 
     private void InsertLivro(){
-        Livro livro = new Livro("Livro Teste","Autor Teste","PT-BR",1234,"2024");  
+        Livro livro = new Livro("Livro Teste 2",2,"PT-BR",2222,"2024");  
         
         try {
             repository.save(livro);
@@ -55,11 +64,35 @@ public class UserInterface {
         
     }
 
-    private void SelectLivro(){
+    private void InsertAutor(){
+        Autor autor = new Autor("Autor Teste");  
+        
+        try {
+            repositoryautor.save(autor);
+        } catch (Exception e) {
+            System.out.println("ERROOO :" + e.getMessage());
+        }  
+        
+    }
+
+    private void SelectAllLivro(){
         
         try {
             List<Livro> livros = repository.findAll(); 
-            System.out.println(livros.toString());
+            System.out.println("====== LISTA DE LIVROS =======");
+            livros.forEach(System.out::println);
+        } catch (Exception e) {
+            System.out.println("ERROOO :" + e.getMessage());
+        }  
+        
+    }
+
+    private void SelectAllAutor(){
+        
+        try {
+            List<Autor> autores = repositoryautor.findAll(); 
+            System.out.println("====== LISTA DE AUTORES =======");
+            autores.forEach(System.out::println);
         } catch (Exception e) {
             System.out.println("ERROOO :" + e.getMessage());
         }  
