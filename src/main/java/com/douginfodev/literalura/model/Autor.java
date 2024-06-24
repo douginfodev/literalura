@@ -15,6 +15,10 @@ public class Autor {
 
     private String nome;
 
+    private String anoNascimento;
+
+    private String anoFalecimento;
+
    // @ManyToOne
    // private Livro livro;
 
@@ -41,10 +45,28 @@ public class Autor {
         this.nome = nome;
     }
 
+    public String getanoNascimento() {
+        return anoNascimento;
+    }
+
+    public void setanoNascimento(String ano) {
+        this.anoNascimento = ano;
+    }
+
+    public String getanoFalecimento() {
+        return anoFalecimento;
+    }
+
+    public void setanoFalecimento(String ano) {
+        this.anoFalecimento = ano;
+    }
+
     @Override
     public String toString() {
         return  "ID: " + this.id + "\n"+
                 "NOME: " + this.nome + "\n"+
+                "DATA NASCIMENTO: " +  this.anoNascimento + "\n"+
+                "DATA FALECIMENTO: " + this.anoFalecimento + "\n"+
                 "----------------------------------"+"\n";
     }
 }
