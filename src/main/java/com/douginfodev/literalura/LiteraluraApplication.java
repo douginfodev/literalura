@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class LiteraluraApplication implements CommandLineRunner {
     @Autowired
     private LivroRepository repository; 
+
+	@Autowired
 	private AutorRepository repositoryautor;
 
 	public static void main(String[] args) {
