@@ -8,8 +8,12 @@ import com.douginfodev.literalura.model.Autor;
 import com.douginfodev.literalura.model.Livro;
 import com.douginfodev.literalura.repository.AutorRepository;
 import com.douginfodev.literalura.repository.LivroRepository;
+import com.douginfodev.literalura.service.ApiGutendex;
+
+
 
 public class UserInterface {
+    String URL = "https://gutendex.com/books/?search=";
     Scanner scanner = new Scanner(System.in);
     int menuNumber = 0;
 
@@ -38,8 +42,13 @@ public class UserInterface {
             menuNumber = scanner.nextInt();
 
             if (menuNumber == 1) {
-                InsertLivro();
-                System.out.println("ENTREI NO :" + menuNumber);
+                ApiGutendex consumirAPI = new ApiGutendex();
+                System.out.println("DIGITE O TITULO DO LIVRO");
+                var tituloLivro = scanner.nextLine();
+                System.out.println(tituloLivro);  
+                String abc = consumirAPI.obterDados(URL+tituloLivro);  
+                //InsertLivro();
+                System.out.println(abc);
             }
 
             if (menuNumber == 2) {
@@ -48,8 +57,8 @@ public class UserInterface {
             }
 
             if (menuNumber == 3) {
+                System.out.println("AUTORES REGISTRADOS");
                 SelectAllAutor();
-                System.out.println("ENTREI NO SELECT :" + menuNumber);
             }
 
             if (menuNumber == 4) {
@@ -67,22 +76,6 @@ public class UserInterface {
                 SelectIdiomaByName(idiomaSelected);
            }
         }
-    }
-
-    private void SelectAutorVivos(int anoSelected) {
-        var ano = String.valueOf(anoSelected);
-        
-        //var ano = "2020";//String.valueOf(anoSelected);
-        List<Autor> autorData = repositoryautor.findByanoFalecimentoGreaterThanEqual(ano);
-  
-        if (!autorData.isEmpty()) {
-             System.out.println(autorData);
-             System.out.println("TOTAL DE AUTORES FALECIDOS: "+autorData.size());
-          } else {
-             System.out.println("====================================");
-             System.out.println("NENHUM AUTOR FALECIDO");
-             System.out.println("====================================");
-         }
     }
 
     private void InsertLivro() {
@@ -128,12 +121,32 @@ public class UserInterface {
 
         try {
             List<Autor> autores = repositoryautor.findAll();
-            System.out.println("====== LISTA DE AUTORES =======");
-            autores.forEach(System.out::println);
+            
+            if (autores.size() > 0){
+             autores.forEach(System.out::println);             
+            }else{
+              System.out.println("====== NENHUM AUTOR REGISTRADO =======");
+            } 
         } catch (Exception e) {
             System.out.println("ERROOO :" + e.getMessage());
         }
 
+    }
+
+    private void SelectAutorVivos(int anoSelected) {
+        var ano = String.valueOf(anoSelected);
+        
+        //var ano = "2020";//String.valueOf(anoSelected);
+        List<Autor> autorData = repositoryautor.findByanoFalecimentoGreaterThanEqual(ano);
+  
+        if (!autorData.isEmpty()) {
+             System.out.println(autorData);
+             System.out.println("TOTAL DE AUTORES FALECIDOS: "+autorData.size());
+          } else {
+             System.out.println("====================================");
+             System.out.println("NENHUM AUTOR FALECIDO");
+             System.out.println("====================================");
+         }
     }
 
     private void SelectIdiomaByName(int idiomaSelect) {
