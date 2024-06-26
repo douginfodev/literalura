@@ -12,7 +12,7 @@
 	<artifactId>literalura</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>literalura</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Literalura - Desafio 02</description>
 	<properties>
 		<java.version>21</java.version>
 	</properties>
@@ -49,6 +49,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.15.2</version>
 		</dependency>
 	</dependencies>
 
