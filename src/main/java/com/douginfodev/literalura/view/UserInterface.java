@@ -4,15 +4,19 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
+import com.douginfodev.literalura.dto.LivrariaDTO;
+import com.douginfodev.literalura.dto.LivroDTO;
 import com.douginfodev.literalura.model.Autor;
 import com.douginfodev.literalura.model.Livro;
 import com.douginfodev.literalura.repository.AutorRepository;
 import com.douginfodev.literalura.repository.LivroRepository;
 import com.douginfodev.literalura.service.ApiGutendex;
-
+import com.douginfodev.literalura.service.DataConvert;
 
 
 public class UserInterface {
+    ApiGutendex consumirAPI = new ApiGutendex();
+    DataConvert convertjson = new DataConvert();
     String URL = "https://gutendex.com/books/?search=";
     Scanner scanner = new Scanner(System.in);
     int menuNumber = 0;
@@ -42,13 +46,11 @@ public class UserInterface {
             menuNumber = scanner.nextInt();
 
             if (menuNumber == 1) {
-                ApiGutendex consumirAPI = new ApiGutendex();
                 System.out.println("DIGITE O TITULO DO LIVRO");
+                scanner.nextLine();
                 var tituloLivro = scanner.nextLine();
-                System.out.println(tituloLivro);  
-                String abc = consumirAPI.obterDados(URL+tituloLivro);  
-                //InsertLivro();
-                System.out.println(abc);
+                
+                SelectLivroFromAPI(tituloLivro);
             }
 
             if (menuNumber == 2) {
@@ -64,8 +66,12 @@ public class UserInterface {
             if (menuNumber == 4) {
                 System.out.println("DIGITE O ANO DE FALECIMENTO:");
                 int anoSelected = scanner.nextInt();
-                SelectAutorVivos(anoSelected);
-                System.out.println("ENTREI NO SELECT :" + menuNumber);
+                
+                if (anoSelected <= 0){
+                    System.out.println("ANO INVÁLIDO");
+                }else{
+                    SelectAutorVivos(anoSelected);
+                }
             }
 
             if (menuNumber == 5) {
@@ -73,18 +79,27 @@ public class UserInterface {
                 System.out.println("2 = INGLES");
                 System.out.println("SELECIONE O IDIOMA:");
                 int idiomaSelected = scanner.nextInt();
-                SelectIdiomaByName(idiomaSelected);
-           }
+                
+                if (idiomaSelected >= 1 || idiomaSelected <= 2 ) {
+                    SelectIdiomaByName(idiomaSelected);
+                }else{
+                    System.out.println("IDIOMA SELECIONADO INVÁLIDO"); 
+                }   
+            }
         }
     }
 
-    private void InsertLivro() {
-        Livro livro = new Livro("Livro Teste 2", 2, "PT-BR", 2222, 2024);
+    private void InsertLivro(LivroDTO livroDados) {
+        
+        Livro livro = new Livro(livroDados);
 
         try {
+            //livro.toString();
             repository.save(livro);
+            System.out.println("LIVRO "+livroDados.titulo().toString()+" INSERIDO COM SUCESSO");
+            System.out.println("----------------------------------");
         } catch (Exception e) {
-            System.out.println("ERROOO :" + e.getMessage());
+           System.out.println("ERROOO :" + e.getMessage());
         }
 
     }
@@ -98,6 +113,23 @@ public class UserInterface {
             System.out.println("ERROOO :" + e.getMessage());
         }
 
+    }
+
+    private void SelectLivroFromAPI(String livrotitulo) {
+        String datajson = consumirAPI.obterDados(URL+livrotitulo.replace(" ","%20").toLowerCase());  
+               
+        var books = convertjson.obterDados(datajson,LivrariaDTO.class);
+       
+        Optional<LivroDTO> livroSelecionado = books.livros().stream()
+            .findFirst(); 
+
+        if (livroSelecionado.isPresent()){
+            LivroDTO livrodados = livroSelecionado.get();
+            InsertLivro(livrodados);
+        }
+        else{
+          System.out.println("NENHUM LIVRO ENCONTRADO");  
+        }             
     }
 
     private void SelectAllLivro() {

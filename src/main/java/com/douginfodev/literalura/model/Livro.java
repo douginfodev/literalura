@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import com.douginfodev.literalura.dto.LivroDTO;
 
 @Entity
 @Table(name = "livros")
@@ -15,33 +16,27 @@ public class Livro {
     private Integer id;
 
     private String titulo;
-    
+
     private Integer autor_id;
 
     private String idioma;
 
-    @Column(unique = true)
-    private Integer isbn;
-
     private Integer numeroDownloads;
 
-   // @OneToMany(mappedBy = "livro")
-   // private List<Autor> autores = new ArrayList<>();
+    // @OneToMany(mappedBy = "livro")
+    // private List<Autor> autores = new ArrayList<>();
 
+    // private List<Autor> autor = new ArrayList<>();
 
-    //private List<Autor> autor = new ArrayList<>();
-
-    public Livro(){}
-
-    public Livro(String Titulo, Integer Autor, String Idioma,Integer Isbn, Integer NumeroDownloads) {
-        this.titulo = Titulo;
-        this.autor_id = Autor;
-        this.idioma = Idioma;
-        this.isbn = Isbn;
-        this.numeroDownloads = NumeroDownloads;
+    public Livro() {
     }
 
-    
+    public Livro(LivroDTO livro) {
+        this.titulo = livro.titulo();
+        this.idioma = String.join(" ", livro.idioma());
+        this.numeroDownloads = livro.numeroDownloads();
+    }
+
     public Integer getId() {
         return id;
     }
@@ -74,15 +69,6 @@ public class Livro {
         this.idioma = idioma;
     }
 
-    public Integer getIsbn() {
-        return isbn;
-    }
-
-
-    public void setIsbn(Integer isbn) {
-        this.isbn = isbn;
-    }
-
     public Integer getNumeroDownloads() {
         return numeroDownloads;
     }
@@ -94,11 +80,10 @@ public class Livro {
     @Override
     public String toString() {
         String aux_autorid = Integer.toString(autor_id);
-        return  "ID: "+ id + "\n"+
-                "TITULO: " + titulo + "\n"+
-                "AUTOR_ID: " + aux_autorid  + '\'' + "\n"+
+        return "ID: " + id + "\n" +
+                "TITULO: " + titulo + "\n" +
                 "IDIOMA: " + idioma + "\n" +
-                "Nº DE DOWNLOADS: " + numeroDownloads+"\n"+
-                "----------------------------------"+"\n";
+                "Nº DE DOWNLOADS: " + numeroDownloads + "\n" +
+                "----------------------------------" + "\n";
     }
 }
