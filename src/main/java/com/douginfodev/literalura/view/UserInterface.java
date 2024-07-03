@@ -91,16 +91,22 @@ public class UserInterface {
 
     private void InsertLivro(LivroDTO livroDados) {
         
-        Livro livro = new Livro(livroDados);
-
-        try {
-            //livro.toString();
-            repository.save(livro);
-            System.out.println("LIVRO "+livroDados.titulo().toString()+" INSERIDO COM SUCESSO");
-            System.out.println("----------------------------------");
-        } catch (Exception e) {
-           System.out.println("ERROOO :" + e.getMessage());
-        }
+        Optional<Livro> verificarLivro = repository.findBytituloEqualsIgnoreCase(livroDados.titulo().toString());
+       
+        if (verificarLivro.isPresent()){
+        
+            Livro livro = new Livro(livroDados);
+       
+            try {
+                repository.save(livro);
+                System.out.println("LIVRO "+livroDados.titulo().toString()+" INSERIDO COM SUCESSO");
+                System.out.println("----------------------------------");
+            }catch (Exception e) {
+               System.out.println("ERROOO :" + e.getMessage());
+            }
+        }else{
+            System.out.println("LIVRO JÁ PESQUISADO / CADASTRADO");   
+        }    
 
     }
 
@@ -109,6 +115,9 @@ public class UserInterface {
 
         try {
             repositoryautor.save(autor);
+            System.out.println("AUTOR INSERIDO COM SUCESSO");
+            System.out.println("----------------------------------");
+    
         } catch (Exception e) {
             System.out.println("ERROOO :" + e.getMessage());
         }
