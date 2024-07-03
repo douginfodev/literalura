@@ -15,9 +15,9 @@ public class Autor {
 
     private String nome;
 
-    private String anoNascimento;
+    private Integer anoNascimento;
 
-    private String anoFalecimento;
+    private Integer anoFalecimento;
 
    // @ManyToOne
    // private Livro livro;
@@ -41,23 +41,25 @@ public class Autor {
 
     public Autor(){}
 
-    public Autor(String nome) {
-        this.nome = nome;
+    public Autor(String autor, Integer dtnascimento, Integer dtfalecimento) {
+        this.nome = autor;
+        this.anoNascimento = dtnascimento;
+        this.anoFalecimento = dtfalecimento;
     }
 
-    public String getanoNascimento() {
+    public Integer getanoNascimento() {
         return anoNascimento;
     }
 
-    public void setanoNascimento(String ano) {
+    public void setanoNascimento(Integer ano) {
         this.anoNascimento = ano;
     }
 
-    public String getanoFalecimento() {
+    public Integer getanoFalecimento() {
         return anoFalecimento;
     }
 
-    public void setanoFalecimento(String ano) {
+    public void setanoFalecimento(Integer ano) {
         this.anoFalecimento = ano;
     }
 

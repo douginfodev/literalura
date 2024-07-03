@@ -1,6 +1,5 @@
 package com.douginfodev.literalura.model;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -79,7 +78,7 @@ public class Livro {
 
     @Override
     public String toString() {
-        String aux_autorid = Integer.toString(autor_id);
+        //String aux_autorid = Integer.toString(autor_id);
         return "ID: " + id + "\n" +
                 "TITULO: " + titulo + "\n" +
                 "IDIOMA: " + idioma + "\n" +

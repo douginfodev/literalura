@@ -8,5 +8,5 @@ import com.douginfodev.literalura.model.Autor;
 
 
 public interface AutorRepository extends JpaRepository<Autor,Integer> {
-  List<Autor> findByanoFalecimentoGreaterThanEqual(String ano);
+  List<Autor> findByanoFalecimentoGreaterThanEqual(Integer ano);
 }

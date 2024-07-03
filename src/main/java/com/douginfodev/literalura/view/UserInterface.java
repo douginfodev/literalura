@@ -93,7 +93,7 @@ public class UserInterface {
         
         Optional<Livro> verificarLivro = repository.findBytituloEqualsIgnoreCase(livroDados.titulo().toString());
        
-        if (verificarLivro.isPresent()){
+        if (verificarLivro.isEmpty()){
         
             Livro livro = new Livro(livroDados);
        
@@ -110,8 +110,8 @@ public class UserInterface {
 
     }
 
-    private void InsertAutor() {
-        Autor autor = new Autor("Autor Teste");
+    private void InsertAutor(String nome, Integer dtnascimento, Integer dtfalecimento) {
+        Autor autor = new Autor(nome,dtnascimento,dtfalecimento);
 
         try {
             repositoryautor.save(autor);
@@ -134,7 +134,9 @@ public class UserInterface {
 
         if (livroSelecionado.isPresent()){
             LivroDTO livrodados = livroSelecionado.get();
+            
             InsertLivro(livrodados);
+            InsertAutor(livrodados.autores().get(0).nome().toString(),livrodados.autores().get(0).anoNascimento(),livrodados.autores().get(0).anoFalecimento());
         }
         else{
           System.out.println("NENHUM LIVRO ENCONTRADO");  
@@ -175,10 +177,10 @@ public class UserInterface {
     }
 
     private void SelectAutorVivos(int anoSelected) {
-        var ano = String.valueOf(anoSelected);
+        //var ano = String.valueOf(anoSelected);
         
         //var ano = "2020";//String.valueOf(anoSelected);
-        List<Autor> autorData = repositoryautor.findByanoFalecimentoGreaterThanEqual(ano);
+        List<Autor> autorData = repositoryautor.findByanoFalecimentoGreaterThanEqual(anoSelected);
   
         if (!autorData.isEmpty()) {
              System.out.println(autorData);
