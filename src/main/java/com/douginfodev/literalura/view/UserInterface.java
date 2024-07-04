@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
+import org.antlr.v4.runtime.atn.SemanticContext.AND;
+
 import com.douginfodev.literalura.dto.LivrariaDTO;
 import com.douginfodev.literalura.dto.LivroDTO;
 import com.douginfodev.literalura.model.Autor;
@@ -65,7 +67,7 @@ public class UserInterface {
 
             if (menuNumber == 4) {
                 System.out.println("DIGITE O ANO DE FALECIMENTO:");
-                int anoSelected = scanner.nextInt();
+                Integer anoSelected = scanner.nextInt();
                 
                 if (anoSelected <= 0){
                     System.out.println("ANO INVÁLIDO");
@@ -136,7 +138,7 @@ public class UserInterface {
             LivroDTO livrodados = livroSelecionado.get();
             
             InsertLivro(livrodados);
-            InsertAutor(livrodados.autores().get(0).nome().toString(),livrodados.autores().get(0).anoNascimento(),livrodados.autores().get(0).anoFalecimento());
+            InsertAutor(livrodados.autores().get(0).nome().toString(),livrodados.autores().get(0).anonascimento(),livrodados.autores().get(0).anofalecimento());
         }
         else{
           System.out.println("NENHUM LIVRO ENCONTRADO");  
@@ -176,11 +178,8 @@ public class UserInterface {
 
     }
 
-    private void SelectAutorVivos(int anoSelected) {
-        //var ano = String.valueOf(anoSelected);
-        
-        //var ano = "2020";//String.valueOf(anoSelected);
-        List<Autor> autorData = repositoryautor.findByanoFalecimentoGreaterThanEqual(anoSelected);
+    private void SelectAutorVivos(Integer anofalecimento) {
+          List<Autor> autorData = repositoryautor.findByanofalecimentoLessThan(anofalecimento);
   
         if (!autorData.isEmpty()) {
              System.out.println(autorData);
