@@ -8,5 +8,45 @@
 
 ## TELAS DO PROGRAMA
 
-### 0 - MENU PRINCIPAL
-<img src="img/menu.jpg" alt="Menu Principal do Propgrama">
+### MENU PRINCIPAL
+<img src="img/menu.jpg" alt="Menu Principal do Programa">
+
+### 1 - BUSCAR LIVROS - via api da gutendex.io
+A API Gutendex é um catálogo com informações sobre os mais de 70 mil livros presentes no Project Gutenberg (biblioteca online gratuita).
+
+Neste caso, realizamos a consulta pelo título do livro na API para reter o primeiro resultado obtido. Um livro deve ter os seguintes atributos:
+Título;
+Autor;
+Idiomas;
+Número de Downloads.
+
+<img src="img/livro_API.jpg" alt="Buscar Livros na API">
+
+### 2 - LISTAR LIVROS REGISTRADOS
+* Listar todos os livros inseridos no banco de dados do postgre.
+
+<img src="img/listar_livros.jpg" alt="listar livros registrados">
+
+### 3 - LISTAR AUTORES REGISTRADOS
+* Listar todos os autores inseridos no banco de dados do postgre.
+
+<img src="img/livro_autores.jpg" alt="Listar autores registrados">
+
+### 4 - LISTAR AUTORES VIVOS EM UM DETERMINADO ANO
+* Agora que você avançou no uso do banco de dados, convidamos você a mudar o método para listar os autores vivos em um determinado ano. Para isso, você deve usar derived queries para recuperar todos os autores que estavam vivos no ano que o usuário fornecerá.
+
+<img src="img/listar_autvivos.jpg" alt="Buscar Livros na API">
+
+### 5 - LISTAR LIVROS POR IDIOMA
+* Uma vez que você já tem livros e autores salvos em seu banco de dados, que tal exibir estatísticas sobre eles para o seu usuário? Aproveite os recursos de Streams do Java e derived queries para fornecer ao seu usuário estatísticas sobre a quantidade de livros em um determinado idioma no banco de dados.
+
+* Não é necessário criar opções para todos os idiomas. Escolha no mínimo dois idiomas.
+
+<img src="img/listar_idioma.jpg" alt="Buscar Livros por idioma">
+
+## 2 - TECNOLOGIAS / FERRAMENTAS / FRAMEWORKS
+- spring boot
+- java 21
+- jpa
+- postgre - Banco de dados
+- API - gutendex.com
