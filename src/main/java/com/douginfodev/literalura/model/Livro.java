@@ -26,12 +26,16 @@ public class Livro {
     // private List<Autor> autores = new ArrayList<>();
 
     // private List<Autor> autor = new ArrayList<>();
+   // @ManyToOne(cascade = CascadeType.ALL)
+   // @JoinColumn(name = "autor_id")
+   // private Autor autor;
 
     public Livro() {
     }
 
     public Livro(LivroDTO livro) {
         this.titulo = livro.titulo();
+        this.autor_id = livro.id();
         this.idioma = String.join(" ", livro.idioma());
         this.numeroDownloads = livro.numeroDownloads();
     }

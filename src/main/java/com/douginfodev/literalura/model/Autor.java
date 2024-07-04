@@ -10,7 +10,7 @@ import jakarta.persistence.Table;
 @Table(name = "autores")
 public class Autor {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String nome;
@@ -41,7 +41,8 @@ public class Autor {
 
     public Autor(){}
 
-    public Autor(String autor, Integer dtnascimento, Integer dtfalecimento) {
+    public Autor(Integer autorid, String autor, Integer dtnascimento, Integer dtfalecimento) {
+        this.id = autorid;
         this.nome = autor;
         this.anonascimento = dtnascimento;
         this.anofalecimento = dtfalecimento;

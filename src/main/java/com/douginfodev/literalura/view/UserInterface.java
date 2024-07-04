@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
-import org.antlr.v4.runtime.atn.SemanticContext.AND;
-
 import com.douginfodev.literalura.dto.LivrariaDTO;
 import com.douginfodev.literalura.dto.LivroDTO;
 import com.douginfodev.literalura.model.Autor;
@@ -101,7 +99,7 @@ public class UserInterface {
        
             try {
                 repository.save(livro);
-                System.out.println("LIVRO "+livroDados.titulo().toString()+" INSERIDO COM SUCESSO");
+                System.out.println(livroDados.titulo().toString()+" inserido com sucesso!");
                 System.out.println("----------------------------------");
             }catch (Exception e) {
                System.out.println("ERROOO :" + e.getMessage());
@@ -112,12 +110,12 @@ public class UserInterface {
 
     }
 
-    private void InsertAutor(String nome, Integer dtnascimento, Integer dtfalecimento) {
-        Autor autor = new Autor(nome,dtnascimento,dtfalecimento);
+    private void InsertAutor(Integer autorid, String nome, Integer dtnascimento, Integer dtfalecimento) {
+        Autor autor = new Autor(autorid,nome,dtnascimento,dtfalecimento);
 
         try {
             repositoryautor.save(autor);
-            System.out.println("AUTOR INSERIDO COM SUCESSO");
+            System.out.println(autor.getNome()+" inserido com sucesso!");
             System.out.println("----------------------------------");
     
         } catch (Exception e) {
@@ -138,7 +136,7 @@ public class UserInterface {
             LivroDTO livrodados = livroSelecionado.get();
             
             InsertLivro(livrodados);
-            InsertAutor(livrodados.autores().get(0).nome().toString(),livrodados.autores().get(0).anonascimento(),livrodados.autores().get(0).anofalecimento());
+            InsertAutor(livrodados.id(),livrodados.autores().get(0).nome().toString(),livrodados.autores().get(0).anonascimento(),livrodados.autores().get(0).anofalecimento());
         }
         else{
           System.out.println("NENHUM LIVRO ENCONTRADO");  
