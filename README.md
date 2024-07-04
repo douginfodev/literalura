@@ -11,7 +11,7 @@
 ### MENU PRINCIPAL
 <img src="img/menu.jpg" alt="Menu Principal do Programa">
 
-### 1 - BUSCAR LIVROS - via api da gutendex.io
+### 1 - BUSCAR LIVROS - via api da <https://gutendex.com>
 A API Gutendex é um catálogo com informações sobre os mais de 70 mil livros presentes no Project Gutenberg (biblioteca online gratuita).
 
 Neste caso, realizamos a consulta pelo título do livro na API para reter o primeiro resultado obtido. Um livro deve ter os seguintes atributos:
@@ -23,14 +23,14 @@ Número de Downloads.
 <img src="img/livro_API.jpg" alt="Buscar Livros na API">
 
 ### 2 - LISTAR LIVROS REGISTRADOS
-* Listar todos os livros inseridos no banco de dados do postgre.
+* Listar todos os livros inseridos no banco de dados do PostgreSQL.
 
 <img src="img/listar_livros.jpg" alt="listar livros registrados">
 
 ### 3 - LISTAR AUTORES REGISTRADOS
-* Listar todos os autores inseridos no banco de dados do postgre.
+* Listar todos os autores inseridos no banco de dados do PostgreSQL.
 
-<img src="img/livro_autores.jpg" alt="Listar autores registrados">
+<img src="img/listar_autores.jpg" alt="Listar autores registrados">
 
 ### 4 - LISTAR AUTORES VIVOS EM UM DETERMINADO ANO
 * Agora que você avançou no uso do banco de dados, convidamos você a mudar o método para listar os autores vivos em um determinado ano. Para isso, você deve usar derived queries para recuperar todos os autores que estavam vivos no ano que o usuário fornecerá.
@@ -48,5 +48,5 @@ Número de Downloads.
 - spring boot
 - java 21
 - jpa
-- postgre - Banco de dados
+- PostgreSQL - Banco de dados Relacional
 - API - gutendex.com
